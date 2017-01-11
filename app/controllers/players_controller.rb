@@ -4,7 +4,11 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.all
+    if params[:t].blank? 
+      @players = []
+    else 
+      @players = Team.find_by(name: params[:t]).players.order("created_at DESC").uniq
+    end
   end
 
   # GET /players/1

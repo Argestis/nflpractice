@@ -4,9 +4,9 @@ class RecordsController < ApplicationController
   # GET /records
   # GET /records.json
   def index
-    @records = Record.all
-    @players_by_team = Team.find_by(name: "Cowboys").players
-    @teams_by_division = Division.find_by(name: "NFC East").teams
+    @divisions = Division.all.order(:name)
+    #@players_by_team = Team.find_by(name: "Cowboys").players
+    #@teams_by_division = Division.find_by(name: "NFC East").teams
   end
 
   # GET /records/1

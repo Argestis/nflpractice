@@ -4,7 +4,11 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    if params[:d].blank? 
+      @teams = Team.all.order("created_at DESC")
+    else 
+      @teams = Division.find_by(name: params[:d]).teams.order("created_at DESC").uniq
+    end
   end
 
   # GET /teams/1
@@ -69,6 +73,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:id, :name)
     end
 end
